@@ -17,7 +17,7 @@
 .team1,
 .team2,
 .team3 {
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 0.5rem;
   font-weight: bold;
 }
@@ -42,4 +42,18 @@
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
+}
+
+.classInstance {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.classScheduleItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  gap: 1.5rem;
 }

@@ -12,6 +12,11 @@ const Home = () => {
     <>
       <div>Bethel Software Process 2025</div>
 
+      <div>
+        This site is a work in process. Complete version will be finished during
+        first class period.
+      </div>
+
       <div className="importantLinksContainer">
         <a href={baseGithubUrl + "COS420 Syllabus 2025.docx"}>Syllabus</a>
         <a href="https://moodle.bethel.edu/course/view.php?id=107396">Moodle</a>
@@ -24,39 +29,64 @@ const Home = () => {
       </div>
 
       <div className="scheduleContainer">
-        <div className="scheduleItem">
+        <div className="classInstance">
           <div className="classDate">February 4th</div>
-          <div className="lectureTitle">
-            What is this class? What is it not? teams, projects, roles
-            <br />
-            <a href={baseGithubUrl + "1 introduction.pptx"}>Lecture Slides</a>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">6:00</div>
+            <div className="lectureTitle">
+              What is this class? What is it not?
+            </div>
+            <div className="lectureNotesLink">
+              <a href={baseGithubUrl + "1 introduction.pptx"}>Slides</a>
+            </div>
+          </div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">7:00</div>
+            <div className="lectureTitle">
+              Form teams, assign roles, and choose projects
+            </div>
+          </div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">7:30</div>
+            <div className="lectureTitle">
+              Setup ADO, create first PBIs, prove a pull request
+            </div>
           </div>
         </div>
 
-        <div className="scheduleItem">
+        <div className="classInstance">
           <div className="classDate">February 11th</div>
-          <div className="lectureTitle">
-            Scrum Process and Estimation
-            <br />
-            <a href={baseGithubUrl + "2 estimation.pptx"}>Lecture Slides</a>
+          <div className="sprintSchedule">Sprint 1 Pre-Planning</div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">6:00</div>
+            <div className="lectureTitle">Scrum Process and Estimation</div>
+            <div className="lectureNotesLink">
+              <a href={baseGithubUrl + "2 estimation.pptx"}>Slides</a>
+            </div>
           </div>
         </div>
 
-        <div className="scheduleItem">
+        <div className="classInstance">
           <div className="classDate">February 18th</div>
-          <div>
-            6:00 - 6:45 <div className="team1">{team1Name}</div>
+          <div className="sprintSchedule">Sprint 1 Planning</div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">6:00</div>
+            <div className="team1">{team1Name}</div>
           </div>
-          <div>
-            6:45 - 7:30 <div className="team2">{team2Name}</div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">6:45</div>
+            <div className="team2">{team2Name}</div>
           </div>
-          <div className="lectureTitle">
-            7:30 - 8:15 Sprint Transistions
-            <br />
-            <a href={baseGithubUrl + "2 estimation.pptx"}>Lecture Slides</a>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">7:30</div>
+            <div className="lectureTitle">Sprint Transistions</div>
+            <div className="lectureNotesLink">
+              <a href={baseGithubUrl + "2 estimation.pptx"}>Slides</a>
+            </div>
           </div>
-          <div>
-            8:15 - 9:00 <div className="team3">{team3Name}</div>
+          <div className="classScheduleItem">
+            <div className="classScheduleItemTime">8:15</div>
+            <div className="team3">{team3Name}</div>
           </div>
         </div>
       </div>

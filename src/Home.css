@@ -6,6 +6,11 @@
   gap: 2rem;
 }
 
+.accordion-button {
+  display: flex;
+  gap: 1rem;
+}
+
 .teamContainer {
   display: flex;
   flex-direction: row;
@@ -14,10 +19,39 @@
   gap: 1rem;
 }
 
+.teamsInformation {
+  min-width: 30%;
+  --bs-accordion-color: white;
+  --bs-accordion-active-bg: var(--bs-accordion-bg);
+}
+
+.colorKeyContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sprintSchedule {
+  color: black;
+  background-color: palegoldenrod;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}
+
+.reviewSchedule {
+  color: black;
+  background-color: #cbc3e3;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}
+
 .team1,
 .team2,
 .team3 {
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 0.5rem;
   font-weight: bold;
 }
@@ -38,10 +72,18 @@
 }
 
 .scheduleContainer {
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  margin-bottom: 0.5rem;
+  --bs-accordion-color: white;
+  --bs-accordion-active-bg: var(--bs-accordion-bg);
+}
+
+.classDate {
+  color: white;
+  font-size: 1.5rem;
 }
 
 .classInstance {

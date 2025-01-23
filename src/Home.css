@@ -1,0 +1,45 @@
+.importantLinksContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team1,
+.team2,
+.team3 {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+.team1 {
+  background-color: aqua;
+  color: black;
+}
+
+.team2 {
+  background-color: lightcoral;
+  color: black;
+}
+
+.team3 {
+  background-color: lightgreen;
+  color: black;
+}
+
+.scheduleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}

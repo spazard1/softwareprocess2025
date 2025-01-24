@@ -1,3 +1,10 @@
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
 .importantLinksContainer {
   display: flex;
   flex-direction: row;
@@ -25,13 +32,6 @@
   --bs-accordion-active-bg: var(--bs-accordion-bg);
 }
 
-.colorKeyContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
 .sprintSchedule {
   color: black;
   background-color: palegoldenrod;
@@ -51,9 +51,8 @@
 .team1,
 .team2,
 .team3 {
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   border-radius: 0.5rem;
-  font-weight: bold;
 }
 
 .team1 {
@@ -98,4 +97,5 @@
   align-items: center;
   justify-content: left;
   gap: 1.5rem;
+  margin-bottom: 0.1rem;
 }

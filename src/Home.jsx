@@ -2,9 +2,10 @@ import { useCallback, useRef } from "react";
 import Accordion from "react-bootstrap/Accordion";
 
 import "./Home.css";
+import TeamScheduleItem from "./TeamScheduleItem";
 
 const baseGithubUrl =
-  "https://github.com/spazard1/softwareprocess2025/raw/refs/heads/main/files/";
+  "https://github.com/spazard1/softwareprocess2025 23:00/raw/refs/heads/main/files/";
 
 const team1Name = "Team 1";
 const team2Name = "Team 2";
@@ -26,35 +27,28 @@ const Home = () => {
     }
   }, []);
 
-  const getTeamNumberForSchedule = useCallback((schedule) => {
-    switch (schedule) {
-      case 1:
-        return earlyTeamRef.current;
-      case 2:
-        return middleTeamRef.current;
-      case 3:
-        return lateTeamRef.current;
-    }
-  }, []);
-
-  const getTeamNameForScheduleAndAdvance = useCallback(
+  const getTeam = useCallback(
     (schedule) => {
+      let teamNumber;
       let teamName;
       switch (schedule) {
         case 1:
+          teamNumber = earlyTeamRef.current;
           teamName = getTeamName(earlyTeamRef.current);
           earlyTeamRef.current = (earlyTeamRef.current % 3) + 1;
           break;
         case 2:
+          teamNumber = middleTeamRef.current;
           teamName = getTeamName(middleTeamRef.current);
           middleTeamRef.current = (middleTeamRef.current % 3) + 1;
           break;
         case 3:
+          teamNumber = lateTeamRef.current;
           teamName = getTeamName(lateTeamRef.current);
           lateTeamRef.current = (lateTeamRef.current % 3) + 1;
           break;
       }
-      return teamName;
+      return { number: teamNumber, name: teamName };
     },
     [getTeamName]
   );
@@ -65,12 +59,7 @@ const Home = () => {
 
   return (
     <>
-      <div>Bethel Software Process 2025</div>
-
-      <div>
-        This site is a work in process. Complete version will be finished during
-        first class period.
-      </div>
+      <div className="title">Bethel Software Process 2025</div>
 
       <div className="importantLinksContainer">
         <a href={baseGithubUrl + "COS420 Syllabus 2025.docx"}>Syllabus</a>
@@ -116,17 +105,11 @@ const Home = () => {
         </Accordion.Item>
       </Accordion>
 
-      <div className="colorKeyContainer">
-        Color Key:
-        <div className="sprintSchedule">Sprints</div>
-        <div className="reviewSchedule">Reviews</div>
-      </div>
-
       <Accordion
         className="scheduleContainer"
         data-bs-theme="dark"
         defaultActiveKey={
-          new Date(Date.parse("February 4 2025")) > new Date() ? "1" : ""
+          new Date(Date.parse("February 4 2025 23:00")) > new Date() ? "1" : ""
         }
       >
         <Accordion.Item eventKey="1">
@@ -163,7 +146,7 @@ const Home = () => {
         className="scheduleContainer"
         data-bs-theme="dark"
         defaultActiveKey={
-          new Date(Date.parse("February 11 2025")) > new Date() ? "1" : ""
+          new Date(Date.parse("February 11 2025 23:00")) > new Date() ? "1" : ""
         }
       >
         <Accordion.Item eventKey="1">
@@ -187,7 +170,7 @@ const Home = () => {
         className="scheduleContainer"
         data-bs-theme="dark"
         defaultActiveKey={
-          new Date(Date.parse("February 18 2025")) > new Date() ? "1" : ""
+          new Date(Date.parse("February 18 2025 23:00")) > new Date() ? "1" : ""
         }
       >
         <Accordion.Item eventKey="1">
@@ -196,18 +179,8 @@ const Home = () => {
             <div className="sprintSchedule">Sprint 1 Planning</div>
           </Accordion.Header>
           <Accordion.Body>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">6:00</div>
-              <div className={"team" + getTeamNumberForSchedule(1)}>
-                {getTeamNameForScheduleAndAdvance(1)}
-              </div>
-            </div>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">6:45</div>
-              <div className={"team" + getTeamNumberForSchedule(2)}>
-                {getTeamNameForScheduleAndAdvance(2)}
-              </div>
-            </div>
+            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
+            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
             <div className="classScheduleItem">
               <div className="classScheduleItemTime">7:30</div>
               <div className="lectureTitle">Sprint Transitions</div>
@@ -215,173 +188,126 @@ const Home = () => {
                 <a href={baseGithubUrl + "3 sprint transitions"}>Slides</a>
               </div>
             </div>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">6:45</div>
-              <div className={"team" + getTeamNumberForSchedule(3)}>
-                {getTeamNameForScheduleAndAdvance(3)}
-              </div>
-            </div>
+            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
 
-      <div className="scheduleContainer">
-        <div className="classInstance">
-          <div className="classDate">February 18th</div>
-          <div className="sprintSchedule">Sprint 1 Planning</div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:00</div>
-            <div className={"team" + getTeamNumberForSchedule(1)}>
-              {getTeamNameForScheduleAndAdvance(1)}
+      <Accordion
+        className="scheduleContainer"
+        data-bs-theme="dark"
+        defaultActiveKey={
+          new Date(Date.parse("February 25 2025 23:00")) > new Date() ? "1" : ""
+        }
+      >
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="classDate">February 25th</div>
+            <div className="sprintSchedule">Sprint 1</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
+            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
+            <div className="classScheduleItem">
+              <div className="classScheduleItemTime">7:30</div>
+              <div className="lectureTitle">Product Managers</div>
+              <div className="lectureNotesLink">
+                <a href={baseGithubUrl + "4 product managers.pptx"}>Slides</a>
+              </div>
             </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(2)}>
-              {getTeamNameForScheduleAndAdvance(2)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">7:30</div>
-            <div className="lectureTitle">Sprint Transitions</div>
-            <div className="lectureNotesLink">
-              <a href={baseGithubUrl + "3 sprint transitions"}>Slides</a>
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(3)}>
-              {getTeamNameForScheduleAndAdvance(3)}
-            </div>
-          </div>
-        </div>
+            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
 
-        <div className="classInstance">
-          <div className="classDate">February 25th</div>
-          <div className="sprintSchedule">Sprint 1</div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:00</div>
-            <div className={"team" + getTeamNumberForSchedule(1)}>
-              {getTeamNameForScheduleAndAdvance(1)}
+      <Accordion
+        className="scheduleContainer"
+        data-bs-theme="dark"
+        defaultActiveKey={
+          new Date(Date.parse("March 4 2025 23:00")) > new Date() ? "1" : ""
+        }
+      >
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="classDate">March 4th</div>
+            <div className="sprintSchedule">Sprint 1</div>
+            <div className="sprintSchedule">Sprint 2 Pre-Planning</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
+            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
+            <div className="classScheduleItem">
+              <div className="classScheduleItemTime">7:30</div>
+              <div className="lectureTitle">Performance Reviews</div>
+              <div className="lectureNotesLink">
+                <a href={baseGithubUrl + "5 performance reviews.pptx"}>
+                  Slides
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(2)}>
-              {getTeamNameForScheduleAndAdvance(2)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">7:30</div>
-            <div className="lectureTitle">Product Managers</div>
-            <div className="lectureNotesLink">
-              <a href={baseGithubUrl + "4 product managers.pptx"}>Slides</a>
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(3)}>
-              {getTeamNameForScheduleAndAdvance(3)}
-            </div>
-          </div>
-        </div>
+            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
 
-        <div className="classInstance">
-          <div className="classDate">March 4th</div>
-          <div className="sprintSchedule">Sprint 1, Sprint 2 Pre-Planning </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:00</div>
-            <div className={"team" + getTeamNumberForSchedule(1)}>
-              {getTeamNameForScheduleAndAdvance(1)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(2)}>
-              {getTeamNameForScheduleAndAdvance(2)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">7:30</div>
-            <div className="lectureTitle">Performance Reviews</div>
-            <div className="lectureNotesLink">
-              <a href={baseGithubUrl + "5 performance reviews.pptx"}>Slides</a>
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(3)}>
-              {getTeamNameForScheduleAndAdvance(3)}
-            </div>
-          </div>
-        </div>
+      <Accordion className="scheduleContainer" data-bs-theme="dark">
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="classDate">March 11th - Spring Break</div>
+          </Accordion.Header>
+        </Accordion.Item>
+      </Accordion>
 
-        <div className="classInstance">
-          <div className="classDate">March 11th</div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">Spring break</div>
-          </div>
-        </div>
+      <Accordion
+        className="scheduleContainer"
+        data-bs-theme="dark"
+        defaultActiveKey={
+          new Date(Date.parse("March 18 2025 23:00")) > new Date() ? "1" : ""
+        }
+      >
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="classDate">March 18th</div>
+            <div className="sprintSchedule">Sprint 2 Planning</div>
+            <div className="reviewSchedule">Performance Review Due</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
+            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
+            <div className="classScheduleItem">
+              <div className="classScheduleItemTime">7:30</div>
+              <div className="lectureTitle">Five Disfunctions of a Team</div>
+              <div className="lectureNotesLink"></div>
+            </div>
+            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
 
-        <div className="classInstance">
-          <div className="classDate">March 18th</div>
-          <div className="sprintSchedule">Sprint 2 Planning</div>
-          <div className="reviewSchedule">First Performance Review Due</div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:00</div>
-            <div className={"team" + getTeamNumberForSchedule(1)}>
-              {getTeamNameForScheduleAndAdvance(1)}
+      <Accordion
+        className="scheduleContainer"
+        data-bs-theme="dark"
+        defaultActiveKey={
+          new Date(Date.parse("March 25 2025 23:00")) > new Date() ? "1" : ""
+        }
+      >
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <div className="classDate">March 25th</div>
+            <div className="sprintSchedule">Sprint 2</div>
+          </Accordion.Header>
+          <Accordion.Body>
+            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
+            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
+            <div className="classScheduleItem">
+              <div className="classScheduleItemTime">7:30</div>
+              <div className="lectureTitle">Five Disfunctions of a Team</div>
+              <div className="lectureNotesLink"></div>
             </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(2)}>
-              {getTeamNameForScheduleAndAdvance(2)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">7:30</div>
-            <div className="lectureTitle">Performance Reviews</div>
-            <div className="lectureNotesLink">
-              <a href={baseGithubUrl + "5 performance reviews.pptx"}>Slides</a>
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(3)}>
-              {getTeamNameForScheduleAndAdvance(3)}
-            </div>
-          </div>
-        </div>
-
-        <div className="classInstance">
-          <div className="classDate">March 25th</div>
-          <div className="sprintSchedule">Sprint 2</div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:00</div>
-            <div className={"team" + getTeamNumberForSchedule(1)}>
-              {getTeamNameForScheduleAndAdvance(1)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(2)}>
-              {getTeamNameForScheduleAndAdvance(2)}
-            </div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">7:30</div>
-            <div className="lectureTitle">Five Disfunctions of a Team</div>
-            <div className="lectureNotesLink"></div>
-          </div>
-          <div className="classScheduleItem">
-            <div className="classScheduleItemTime">6:45</div>
-            <div className={"team" + getTeamNumberForSchedule(3)}>
-              {getTeamNameForScheduleAndAdvance(3)}
-            </div>
-          </div>
-        </div>
-      </div>
+            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
     </>
   );
 };

@@ -1,7 +1,12 @@
+html {
+  font-size: calc(15px + 0.390625vw);
+  height: 100%;
+}
+
 body {
   color: white;
   background-color: #242424;
-  font-size: 1.25rem;
+  padding: 0.5rem;
 }
 
 a {

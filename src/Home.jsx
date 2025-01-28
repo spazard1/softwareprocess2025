@@ -69,7 +69,7 @@ const Home = () => {
       <Accordion className="teamsInformation" data-bs-theme="dark">
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className={"team1"}>{team1Name}</div>
+            <div className={"roundedTag team1"}>{team1Name}</div>
           </Accordion.Header>
           <Accordion.Body>
             <div>Project</div>
@@ -81,7 +81,7 @@ const Home = () => {
         </Accordion.Item>
         <Accordion.Item eventKey="2">
           <Accordion.Header>
-            <div className={"team2"}>{team2Name}</div>
+            <div className={"roundedTag team2"}>{team2Name}</div>
           </Accordion.Header>
           <Accordion.Body>
             <div>Project</div>
@@ -93,7 +93,7 @@ const Home = () => {
         </Accordion.Item>
         <Accordion.Item eventKey="3">
           <Accordion.Header>
-            <div className={"team3"}>{team3Name}</div>
+            <div className={"roundedTag team3"}>{team3Name}</div>
           </Accordion.Header>
           <Accordion.Body>
             <div>Project</div>
@@ -114,7 +114,9 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">February 4th</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">February 4th</div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <div className="classScheduleItem">
@@ -151,8 +153,12 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">February 11th</div>
-            <div className="sprintSchedule">Sprint 1 Pre-Planning</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">February 11th</div>
+              <div className="roundedTag sprintSchedule">
+                Sprint 1 Pre-Planning
+              </div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <div className="classScheduleItem">
@@ -175,8 +181,10 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">February 18th</div>
-            <div className="sprintSchedule">Sprint 1 Planning</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">February 18th</div>
+              <div className="roundedTag sprintSchedule">Sprint 1 Planning</div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
@@ -202,8 +210,10 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">February 25th</div>
-            <div className="sprintSchedule">Sprint 1</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">February 25th</div>
+              <div className="roundedTag sprintSchedule">Sprint 1</div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
@@ -229,9 +239,14 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">March 4th</div>
-            <div className="sprintSchedule">Sprint 1</div>
-            <div className="sprintSchedule">Sprint 2 Pre-Planning</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">March 4th</div>
+              <div className="roundedTag scheduleAlert">Online Class</div>
+              <div className="roundedTag sprintSchedule">Sprint 1</div>
+              <div className="roundedTag sprintSchedule">
+                Sprint 2 Pre-Planning
+              </div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
@@ -253,7 +268,9 @@ const Home = () => {
       <Accordion className="scheduleContainer" data-bs-theme="dark">
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">March 11th - Spring Break</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">March 11th - Spring Break</div>
+            </div>
           </Accordion.Header>
         </Accordion.Item>
       </Accordion>
@@ -267,9 +284,13 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">March 18th</div>
-            <div className="sprintSchedule">Sprint 2 Planning</div>
-            <div className="reviewSchedule">Performance Review Due</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">March 18th</div>
+              <div className="roundedTag sprintSchedule">Sprint 2 Planning</div>
+              <div className="roundedTag reviewSchedule">
+                Performance Review Due
+              </div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
@@ -293,8 +314,10 @@ const Home = () => {
       >
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <div className="classDate">March 25th</div>
-            <div className="sprintSchedule">Sprint 2</div>
+            <div className="classScheduleHeader">
+              <div className="classDate">March 25th</div>
+              <div className="roundedTag sprintSchedule">Sprint 2</div>
+            </div>
           </Accordion.Header>
           <Accordion.Body>
             <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />

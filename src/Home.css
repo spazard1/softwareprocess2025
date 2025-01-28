@@ -1,5 +1,5 @@
 .title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
   text-align: center;
@@ -13,9 +13,11 @@
   gap: 2rem;
 }
 
-.accordion-button {
+.classScheduleHeader {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .teamContainer {
@@ -27,51 +29,50 @@
 }
 
 .teamsInformation {
-  min-width: 30%;
+  width: 100%;
   --bs-accordion-color: white;
   --bs-accordion-active-bg: var(--bs-accordion-bg);
+}
+
+.roundedTag {
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.scheduleAlert {
+  color: black;
+  background-color: orange;
 }
 
 .sprintSchedule {
   color: black;
   background-color: palegoldenrod;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.5rem;
-  align-self: flex-start;
 }
 
 .reviewSchedule {
   color: black;
   background-color: #cbc3e3;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.5rem;
-  align-self: flex-start;
-}
-
-.team1,
-.team2,
-.team3 {
-  padding: 0.1rem 0.5rem;
-  border-radius: 0.5rem;
 }
 
 .team1 {
-  background-color: aqua;
   color: black;
+  background-color: aqua;
 }
 
 .team2 {
-  background-color: lightcoral;
   color: black;
+  background-color: lightcoral;
 }
 
 .team3 {
-  background-color: lightgreen;
   color: black;
+  background-color: lightgreen;
 }
 
 .scheduleContainer {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,7 +83,8 @@
 
 .classDate {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  white-space: nowrap;
 }
 
 .classInstance {
@@ -98,4 +100,14 @@
   justify-content: left;
   gap: 1.5rem;
   margin-bottom: 0.1rem;
+}
+
+@media only screen and (min-width: 1000px) {
+  .teamsInformation {
+    width: 40%;
+  }
+
+  .scheduleContainer {
+    width: 50%;
+  }
 }

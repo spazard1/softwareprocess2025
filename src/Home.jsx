@@ -131,7 +131,8 @@ const Home = () => {
             <div className="classScheduleItem">
               <div className="classScheduleItemTime">7:00</div>
               <div className="lectureTitle">
-                Form teams, assign roles, and choose projects
+                Form teams, assign roles, and{" "}
+                <a href="/projects">choose projects</a>
               </div>
             </div>
             <div className="classScheduleItem">

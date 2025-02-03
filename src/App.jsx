@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router";
 import Home from "./Home";
+import Projects from "./Projects";
 
 import "./App.css";
 
@@ -8,6 +9,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
 
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>

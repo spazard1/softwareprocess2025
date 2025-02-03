@@ -7,6 +7,6 @@ export default defineConfig({
   server: {
     open: "http://localhost:3000",
     port: 3000,
-    strictPort: true,
+    strictPort: false,
   },
 });

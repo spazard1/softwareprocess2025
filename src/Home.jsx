@@ -1,20 +1,29 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import Accordion from "react-bootstrap/Accordion";
+import TeamScheduleItem from "./TeamScheduleItem";
+import TeamsInformation from "./TeamsInformation";
 
 import "./Home.css";
-import TeamScheduleItem from "./TeamScheduleItem";
 
 const baseGithubUrl =
-  "https://github.com/spazard1/softwareprocess2025 23:00/raw/refs/heads/main/files/";
+  "https://github.com/spazard1/softwareprocess2025/raw/refs/heads/main/files/";
 
 const team1Name = "Team 1";
 const team2Name = "Team 2";
 const team3Name = "Team 3";
 
+const firstSlot = "6:00";
+const secondSlot = "6:45";
+const thirdSlot = "7:30";
+const fourthSlot = "8:15";
+
 const Home = () => {
-  const earlyTeamRef = useRef(1);
-  const middleTeamRef = useRef(2);
-  const lateTeamRef = useRef(3);
+  const earlyTeamRef = useRef();
+  const middleTeamRef = useRef();
+  const lateTeamRef = useRef();
+  earlyTeamRef.current = 1;
+  middleTeamRef.current = 2;
+  lateTeamRef.current = 3;
 
   const getTeamName = useCallback((teamNumber) => {
     switch (teamNumber) {
@@ -31,26 +40,151 @@ const Home = () => {
     (schedule) => {
       let teamNumber;
       let teamName;
+      let time;
       switch (schedule) {
         case 1:
+          time = firstSlot;
           teamNumber = earlyTeamRef.current;
           teamName = getTeamName(earlyTeamRef.current);
           earlyTeamRef.current = (earlyTeamRef.current % 3) + 1;
           break;
         case 2:
+          time = secondSlot;
           teamNumber = middleTeamRef.current;
           teamName = getTeamName(middleTeamRef.current);
           middleTeamRef.current = (middleTeamRef.current % 3) + 1;
           break;
         case 3:
+          time = fourthSlot;
           teamNumber = lateTeamRef.current;
           teamName = getTeamName(lateTeamRef.current);
           lateTeamRef.current = (lateTeamRef.current % 3) + 1;
           break;
       }
-      return { number: teamNumber, name: teamName };
+      return { time, teamNumber: teamNumber, teamName: teamName };
     },
     [getTeamName]
+  );
+
+  const schedules = useMemo(
+    () => [
+      {
+        date: "February 4",
+        slots: [
+          {
+            time: firstSlot,
+            title: "What is this class? What is it not?",
+            link: {
+              title: "Slides",
+              url: baseGithubUrl + "1 introduction.pptx",
+            },
+          },
+          {
+            time: "7:00",
+            title: "Form teams, assign roles, and choose projects",
+            link: { title: "Projects", url: "/projects" },
+          },
+          {
+            time: "7:30",
+            title: "Setup ADO, create first PBIs, prove a pull request",
+          },
+        ],
+      },
+      {
+        date: "February 11",
+        tags: [{ type: "sprintSchedule", title: "Sprint 1 Pre-Planning" }],
+        slots: [
+          {
+            time: firstSlot,
+            title: "Scrum Process and Estimation",
+            link: {
+              title: "Slides",
+              url: baseGithubUrl + "2 estimation.pptx",
+            },
+          },
+          {
+            time: "7:00",
+            title: "Create initial PBIs for Sprint 1",
+          },
+        ],
+      },
+      {
+        date: "February 18",
+        tags: [{ type: "sprintSchedule", title: "Sprint 1 Planning" }],
+        slots: [
+          getTeam(1),
+          getTeam(2),
+          {
+            time: thirdSlot,
+            title: "Sprint Transitions",
+            link: {
+              title: "Slides",
+              url: baseGithubUrl + "3 sprint transitions.pptx",
+            },
+          },
+          getTeam(3),
+        ],
+      },
+      {
+        date: "February 25",
+        tags: [{ type: "sprintSchedule", title: "Sprint 1" }],
+        slots: [
+          getTeam(1),
+          getTeam(2),
+          {
+            time: thirdSlot,
+            title: "Product Managers",
+            link: {
+              title: "Slides",
+              url: baseGithubUrl + "4 product managers.pptx",
+            },
+          },
+          getTeam(3),
+        ],
+      },
+      {
+        date: "March 4",
+        tags: [
+          { type: "scheduleAlert", title: "Online Lecture" },
+          { type: "sprintSchedule", title: "Sprint 1" },
+          { type: "sprintSchedule", title: "Sprint 2 Pre-Planning" },
+        ],
+        slots: [
+          getTeam(1),
+          getTeam(2),
+          {
+            time: thirdSlot,
+            title: "Performance Reviews",
+            link: {
+              title: "Slides",
+              url: baseGithubUrl + "5 performance reviews.pptx",
+            },
+          },
+          getTeam(3),
+        ],
+      },
+      {
+        date: "March 11",
+        tags: [{ type: "scheduleAlert", title: "Spring Break" }],
+      },
+      {
+        date: "March 18",
+        tags: [
+          { type: "reviewSchedule", title: "Performance Review Due" },
+          { type: "sprintSchedule", title: "Sprint 2 Planning" },
+        ],
+        slots: [
+          getTeam(1),
+          getTeam(2),
+          {
+            time: thirdSlot,
+            title: "5 Disfunctions of a Team",
+          },
+          getTeam(3),
+        ],
+      },
+    ],
+    [getTeam]
   );
 
   earlyTeamRef.current = 1;
@@ -61,277 +195,56 @@ const Home = () => {
     <>
       <div className="title">Bethel Software Process 2025</div>
 
-      <div className="importantLinksContainer">
-        <a href={baseGithubUrl + "COS420 Syllabus 2025.docx"}>Syllabus</a>
-        <a href="https://moodle.bethel.edu/course/view.php?id=107396">Moodle</a>
-      </div>
+      <TeamsInformation
+        team1Name={team1Name}
+        team2Name={team2Name}
+        team3Name={team3Name}
+        baseGithubUrl={baseGithubUrl}
+      />
 
-      <Accordion className="teamsInformation" data-bs-theme="dark">
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className={"roundedTag team1"}>{team1Name}</div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <div>Project</div>
-            <div>Member 1 - Scrum Master</div>
-            <div>Member 2 - PM</div>
-            <div>Member 3 - Engineer</div>
-            <div>Member 4 - Engineer</div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="2">
-          <Accordion.Header>
-            <div className={"roundedTag team2"}>{team2Name}</div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <div>Project</div>
-            <div>Member 1 - Scrum Master</div>
-            <div>Member 2 - PM</div>
-            <div>Member 3 - Engineer</div>
-            <div>Member 4 - Engineer</div>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey="3">
-          <Accordion.Header>
-            <div className={"roundedTag team3"}>{team3Name}</div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <div>Project</div>
-            <div>Member 1 - Scrum Master</div>
-            <div>Member 2 - PM</div>
-            <div>Member 3 - Engineer</div>
-            <div>Member 4 - Engineer</div>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("February 4 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">February 4th</div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">6:00</div>
-              <div className="lectureTitle">
-                What is this class? What is it not?
+      {schedules.map((schedule) => (
+        <Accordion
+          key={schedule.date}
+          className="scheduleContainer"
+          data-bs-theme="dark"
+          defaultActiveKey={
+            new Date(Date.parse(schedule.date + " 2025 23:00")) > new Date()
+              ? "1"
+              : ""
+          }
+        >
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>
+              <div className="classScheduleHeader">
+                <div className="classDate">{schedule.date}</div>
+                {schedule.tags?.map((tag) => (
+                  <div className={"roundedTag " + tag.type} key={tag.title}>
+                    {tag.title}
+                  </div>
+                ))}
               </div>
-              <div className="lectureNotesLink">
-                <a href={baseGithubUrl + "1 introduction.pptx"}>Slides</a>
-              </div>
-            </div>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:00</div>
-              <div className="lectureTitle">
-                Form teams, assign roles, and{" "}
-                <a href="/projects">choose projects</a>
-              </div>
-            </div>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">
-                Setup ADO, create first PBIs, prove a pull request
-              </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("February 11 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">February 11th</div>
-              <div className="roundedTag sprintSchedule">
-                Sprint 1 Pre-Planning
-              </div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">6:00</div>
-              <div className="lectureTitle">Scrum Process and Estimation</div>
-              <div className="lectureNotesLink">
-                <a href={baseGithubUrl + "2 estimation.pptx"}>Slides</a>
-              </div>
-            </div>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("February 18 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">February 18th</div>
-              <div className="roundedTag sprintSchedule">Sprint 1 Planning</div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
-            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">Sprint Transitions</div>
-              <div className="lectureNotesLink">
-                <a href={baseGithubUrl + "3 sprint transitions"}>Slides</a>
-              </div>
-            </div>
-            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("February 25 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">February 25th</div>
-              <div className="roundedTag sprintSchedule">Sprint 1</div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
-            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">Product Managers</div>
-              <div className="lectureNotesLink">
-                <a href={baseGithubUrl + "4 product managers.pptx"}>Slides</a>
-              </div>
-            </div>
-            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("March 4 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">March 4th</div>
-              <div className="roundedTag scheduleAlert">Online Class</div>
-              <div className="roundedTag sprintSchedule">Sprint 1</div>
-              <div className="roundedTag sprintSchedule">
-                Sprint 2 Pre-Planning
-              </div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
-            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">Performance Reviews</div>
-              <div className="lectureNotesLink">
-                <a href={baseGithubUrl + "5 performance reviews.pptx"}>
-                  Slides
-                </a>
-              </div>
-            </div>
-            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion className="scheduleContainer" data-bs-theme="dark">
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">March 11th - Spring Break</div>
-            </div>
-          </Accordion.Header>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("March 18 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">March 18th</div>
-              <div className="roundedTag sprintSchedule">Sprint 2 Planning</div>
-              <div className="roundedTag reviewSchedule">
-                Performance Review Due
-              </div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
-            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">Five Disfunctions of a Team</div>
-              <div className="lectureNotesLink"></div>
-            </div>
-            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-
-      <Accordion
-        className="scheduleContainer"
-        data-bs-theme="dark"
-        defaultActiveKey={
-          new Date(Date.parse("March 25 2025 23:00")) > new Date() ? "1" : ""
-        }
-      >
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>
-            <div className="classScheduleHeader">
-              <div className="classDate">March 25th</div>
-              <div className="roundedTag sprintSchedule">Sprint 2</div>
-            </div>
-          </Accordion.Header>
-          <Accordion.Body>
-            <TeamScheduleItem scheduleTime={"6:00"} team={getTeam(1)} />
-            <TeamScheduleItem scheduleTime={"6:45"} team={getTeam(2)} />
-            <div className="classScheduleItem">
-              <div className="classScheduleItemTime">7:30</div>
-              <div className="lectureTitle">Five Disfunctions of a Team</div>
-              <div className="lectureNotesLink"></div>
-            </div>
-            <TeamScheduleItem scheduleTime={"8:15"} team={getTeam(3)} />
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+            </Accordion.Header>
+            {schedule.slots && (
+              <Accordion.Body>
+                {schedule.slots?.map((slot) => (
+                  <div className="classScheduleItem" key={slot.time}>
+                    <div className="classScheduleItemTime">{slot.time}</div>
+                    {slot.title && (
+                      <div className="lectureTitle">{slot.title}</div>
+                    )}
+                    {slot.teamNumber && <TeamScheduleItem slot={slot} />}
+                    {slot.link && (
+                      <div className="lectureNotesLink">
+                        <a href={slot.link.url}>{slot.link.title}</a>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </Accordion.Body>
+            )}
+          </Accordion.Item>
+        </Accordion>
+      ))}
     </>
   );
 };

@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 
-const TeamScheduleItem = ({ scheduleTime, team }) => {
+const TeamScheduleItem = ({ slot }) => {
   return (
     <div className="classScheduleItem">
-      <div className="classScheduleItemTime">{scheduleTime}</div>
-      <div className={"roundedTag team" + team.number}>{team.name}</div>
+      <div className={"roundedTag team" + slot?.teamNumber}>{slot?.teamName}</div>
     </div>
   );
 };
@@ -12,6 +11,5 @@ const TeamScheduleItem = ({ scheduleTime, team }) => {
 export default TeamScheduleItem;
 
 TeamScheduleItem.propTypes = {
-  scheduleTime: PropTypes.string,
-  team: PropTypes.object,
+  slot: PropTypes.object,
 };

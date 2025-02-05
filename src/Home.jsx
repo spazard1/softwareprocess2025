@@ -187,10 +187,6 @@ const Home = () => {
     [getTeam]
   );
 
-  earlyTeamRef.current = 1;
-  middleTeamRef.current = 2;
-  lateTeamRef.current = 3;
-
   return (
     <>
       <div className="title">Bethel Software Process 2025</div>

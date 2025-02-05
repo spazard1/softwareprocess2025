@@ -8,9 +8,9 @@ import "./Home.css";
 const baseGithubUrl =
   "https://github.com/spazard1/softwareprocess2025/raw/refs/heads/main/files/";
 
-const team1Name = "Team 1";
-const team2Name = "Team 2";
-const team3Name = "Team 3";
+const team1Name = "In Decent Exposure";
+const team2Name = "Robot Rally";
+const team3Name = "Royal Rangers";
 
 const firstSlot = "6:00";
 const secondSlot = "6:45";

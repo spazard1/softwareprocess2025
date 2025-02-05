@@ -25,7 +25,6 @@ const TeamsInformation = ({
           <div className={"roundedTag team1"}>{team1Name}</div>
         </Accordion.Header>
         <Accordion.Body>
-          <div>Photos</div>
           <div>Kyle Melby - Scrum Master</div>
           <div>David Schieffer - PM</div>
           <div>Jenny Njogu - Engineer</div>
@@ -39,7 +38,6 @@ const TeamsInformation = ({
           <div className={"roundedTag team2"}>{team2Name}</div>
         </Accordion.Header>
         <Accordion.Body>
-          <div>Robots</div>
           <div>Clark Nelson - Scrum Master</div>
           <div>{"Murphy O'Maley - PM"}</div>
           <div>Bright Holst - Engineer</div>
@@ -53,7 +51,6 @@ const TeamsInformation = ({
           <div className={"roundedTag team3"}>{team3Name}</div>
         </Accordion.Header>
         <Accordion.Body>
-          <div>GPS Adventure</div>
           <div>Hailey DuPrée - Scrum Master</div>
           <div>David Carlson - PM</div>
           <div>Caleb Climaco - Engineer</div>

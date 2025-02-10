@@ -66,6 +66,18 @@ const Home = () => {
     [getTeamName]
   );
 
+  const getStandardSchedule = useCallback(
+    (lectureInfo) => {
+      return [
+        getTeam(1),
+        getTeam(2),
+        { ...lectureInfo, time: thirdSlot },
+        getTeam(3),
+      ];
+    },
+    [getTeam]
+  );
+
   const schedules = useMemo(
     () => [
       {
@@ -75,7 +87,6 @@ const Home = () => {
             time: firstSlot,
             title: "What is this class? What is it not?",
             link: {
-              title: "Slides",
               url: baseGithubUrl + "1 introduction.pptx",
             },
           },
@@ -97,10 +108,7 @@ const Home = () => {
           {
             time: firstSlot,
             title: "Scrum Process and Estimation",
-            link: {
-              title: "Slides",
-              url: baseGithubUrl + "2 estimation.pptx",
-            },
+            link: baseGithubUrl + "2 estimation.pptx",
           },
           {
             time: "7:00",
@@ -111,36 +119,18 @@ const Home = () => {
       {
         date: "February 18",
         tags: [{ type: "sprintSchedule", title: "Sprint 1 Planning" }],
-        slots: [
-          getTeam(1),
-          getTeam(2),
-          {
-            time: thirdSlot,
-            title: "Sprint Transitions",
-            link: {
-              title: "Slides",
-              url: baseGithubUrl + "3 sprint transitions.pptx",
-            },
-          },
-          getTeam(3),
-        ],
+        slots: getStandardSchedule({
+          title: "Sprint Transitions",
+          link: baseGithubUrl + "3 sprint transitions.pptx",
+        }),
       },
       {
         date: "February 25",
         tags: [{ type: "sprintSchedule", title: "Sprint 1" }],
-        slots: [
-          getTeam(1),
-          getTeam(2),
-          {
-            time: thirdSlot,
-            title: "Product Managers",
-            link: {
-              title: "Slides",
-              url: baseGithubUrl + "4 product managers.pptx",
-            },
-          },
-          getTeam(3),
-        ],
+        slots: getStandardSchedule({
+          title: "Product Managers",
+          link: baseGithubUrl + "4 product managers.pptx",
+        }),
       },
       {
         date: "March 4",
@@ -149,19 +139,10 @@ const Home = () => {
           { type: "sprintSchedule", title: "Sprint 1" },
           { type: "sprintSchedule", title: "Sprint 2 Pre-Planning" },
         ],
-        slots: [
-          getTeam(1),
-          getTeam(2),
-          {
-            time: thirdSlot,
-            title: "Performance Reviews",
-            link: {
-              title: "Slides",
-              url: baseGithubUrl + "5 performance reviews.pptx",
-            },
-          },
-          getTeam(3),
-        ],
+        slots: getStandardSchedule({
+          title: "Performance Reviews",
+          link: baseGithubUrl + "5 performance reviews.pptx",
+        }),
       },
       {
         date: "March 11",
@@ -173,18 +154,90 @@ const Home = () => {
           { type: "reviewSchedule", title: "Performance Review Due" },
           { type: "sprintSchedule", title: "Sprint 2 Planning" },
         ],
+        slots: getStandardSchedule({
+          title: "Git",
+        }),
+      },
+      {
+        date: "March 25",
+        tags: [{ type: "sprintSchedule", title: "Sprint 2" }],
+        slots: getStandardSchedule({
+          title: "Five Disfunctions of a Team",
+        }),
+      },
+      {
+        date: "April 1",
+        tags: [
+          { type: "sprintSchedule", title: "Sprint 2" },
+          { type: "sprintSchedule", title: "Sprint 3 Pre-Planning" },
+        ],
+
+        slots: getStandardSchedule({
+          title: "How to ship software without a PM",
+        }),
+      },
+      {
+        date: "April 8",
+        tags: [{ type: "sprintSchedule", title: "Sprint 3 Planning" }],
+        slots: getStandardSchedule({
+          title: "Followers, Leaders, and Power",
+        }),
+      },
+      {
+        date: "April 15",
+        tags: [
+          { type: "sprintSchedule", title: "Sprint 3" },
+        ],
+        slots: getStandardSchedule({
+          title: "The Coaching Habit",
+        }),
+      },
+      {
+        date: "April 22",
+        tags: [
+          { type: "sprintSchedule", title: "Sprint 3" },
+          { type: "sprintSchedule", title: "Sprint 4 Pre-Planning" },
+        ],
+        slots: getStandardSchedule({
+          title: "Resumes, Jobs, and Money",
+        }),
+      },
+      {
+        date: "April 29",
+        tags: [{ type: "sprintSchedule", title: "Sprint 4 Planning" }],
+        slots: getStandardSchedule({
+          title: "Guests and ???",
+        }),
+      },
+      {
+        date: "May 6",
+        tags: [{ type: "sprintSchedule", title: "Sprint 4" }],
+        slots: getStandardSchedule({
+          title: "Software Engineering Levels",
+        }),
+      },
+      {
+        date: "May 13",
+        tags: [
+          { type: "sprintSchedule", title: "Sprint 4" },
+        ],
+        slots: getStandardSchedule({
+          title: "How to Interview Candidates",
+        }),
+      },
+      {
+        date: "May 20",
+        tags: [
+          { type: "scheduleAlert", title: "Final Presentations" }
+        ],
         slots: [
-          getTeam(1),
-          getTeam(2),
-          {
-            time: thirdSlot,
-            title: "5 Disfunctions of a Team",
-          },
-          getTeam(3),
+          { ...getTeam(1), time: "6:00" },
+          { ...getTeam(2), time: "7:00" },
+          { ...getTeam(3), time: "8:00" },
         ],
       },
     ],
-    [getTeam]
+    [getStandardSchedule, getTeam]
   );
 
   return (
@@ -231,7 +284,15 @@ const Home = () => {
                     {slot.teamNumber && <TeamScheduleItem slot={slot} />}
                     {slot.link && (
                       <div className="lectureNotesLink">
-                        <a href={slot.link.url}>{slot.link.title}</a>
+                        <a
+                          href={
+                            typeof slot.link === "string"
+                              ? slot.link
+                              : slot.link.url
+                          }
+                        >
+                          {slot.link.title ? slot.link.title : "Slides"}
+                        </a>
                       </div>
                     )}
                   </div>

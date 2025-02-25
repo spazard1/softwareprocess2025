@@ -135,7 +135,7 @@ const Home = () => {
       {
         date: "March 4",
         tags: [
-          { type: "scheduleAlert", title: "Online Lecture" },
+          { type: "scheduleAlert", title: "No Class" },
           { type: "sprintSchedule", title: "Sprint 1" },
           { type: "sprintSchedule", title: "Sprint 2 Pre-Planning" },
         ],
@@ -185,9 +185,7 @@ const Home = () => {
       },
       {
         date: "April 15",
-        tags: [
-          { type: "sprintSchedule", title: "Sprint 3" },
-        ],
+        tags: [{ type: "sprintSchedule", title: "Sprint 3" }],
         slots: getStandardSchedule({
           title: "The Coaching Habit",
         }),
@@ -218,18 +216,14 @@ const Home = () => {
       },
       {
         date: "May 13",
-        tags: [
-          { type: "sprintSchedule", title: "Sprint 4" },
-        ],
+        tags: [{ type: "sprintSchedule", title: "Sprint 4" }],
         slots: getStandardSchedule({
           title: "How to Interview Candidates",
         }),
       },
       {
         date: "May 20",
-        tags: [
-          { type: "scheduleAlert", title: "Final Presentations" }
-        ],
+        tags: [{ type: "scheduleAlert", title: "Final Presentations" }],
         slots: [
           { ...getTeam(1), time: "6:00" },
           { ...getTeam(2), time: "7:00" },

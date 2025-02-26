@@ -139,10 +139,12 @@ const Home = () => {
           { type: "sprintSchedule", title: "Sprint 1" },
           { type: "sprintSchedule", title: "Sprint 2 Pre-Planning" },
         ],
-        slots: getStandardSchedule({
-          title: "Performance Reviews",
-          link: baseGithubUrl + "5 performance reviews.pptx",
-        }),
+        slots: [
+          {
+            title: "Performance Reviews",
+            link: baseGithubUrl + "5 performance reviews.pptx",
+          },
+        ],
       },
       {
         date: "March 11",

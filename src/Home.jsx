@@ -165,7 +165,14 @@ const Home = () => {
         date: "March 25",
         tags: [{ type: "sprintSchedule", title: "Sprint 2" }],
         slots: getStandardSchedule({
-          title: "Five Disfunctions of a Team",
+          title: "Five Dysfunctions of a Team",
+          links: [
+            baseGithubUrl + "7 five dysfunctions.pptx",
+            {
+              url: baseGithubUrl + "five dysfunctions questionare.pptx",
+              title: "Questionare",
+            },
+          ],
         }),
       },
       {
@@ -177,6 +184,7 @@ const Home = () => {
 
         slots: getStandardSchedule({
           title: "How to ship software without a PM",
+          link: baseGithubUrl + "8 how to ship software without a pm.pptx",
         }),
       },
       {
@@ -184,6 +192,7 @@ const Home = () => {
         tags: [{ type: "sprintSchedule", title: "Sprint 3 Planning" }],
         slots: getStandardSchedule({
           title: "Followers, Leaders, and Power",
+          link: baseGithubUrl + "9 followers, leaders, and power.pptx",
         }),
       },
       {
@@ -191,6 +200,7 @@ const Home = () => {
         tags: [{ type: "sprintSchedule", title: "Sprint 3" }],
         slots: getStandardSchedule({
           title: "The Coaching Habit",
+          link: baseGithubUrl + "10 the coaching habit.pptx",
         }),
       },
       {
@@ -201,6 +211,7 @@ const Home = () => {
         ],
         slots: getStandardSchedule({
           title: "Resumes, Jobs, and Money",
+          link: baseGithubUrl + "11 resumes, jobs, and money.pptx",
         }),
       },
       {
@@ -215,6 +226,7 @@ const Home = () => {
         tags: [{ type: "sprintSchedule", title: "Sprint 4" }],
         slots: getStandardSchedule({
           title: "Software Engineering Levels",
+          link: baseGithubUrl + "12 software engineering levels.pptx",
         }),
       },
       {
@@ -222,15 +234,20 @@ const Home = () => {
         tags: [{ type: "sprintSchedule", title: "Sprint 4" }],
         slots: getStandardSchedule({
           title: "How to Interview Candidates",
+          link: baseGithubUrl + "13 how to interview candidates.pptx",
         }),
       },
       {
         date: "May 20",
         tags: [{ type: "scheduleAlert", title: "Final Presentations" }],
         slots: [
-          { ...getTeam(1), time: "6:00" },
-          { ...getTeam(2), time: "7:00" },
-          { ...getTeam(3), time: "8:00" },
+          {
+            title:
+              "All students are expected to attend all presentations. Each presentation will be 45 to 60 minutes.",
+          },
+          { ...getTeam(1), time: "1." },
+          { ...getTeam(2), time: "2." },
+          { ...getTeam(3), time: "3." },
         ],
       },
     ],
@@ -292,6 +309,13 @@ const Home = () => {
                         </a>
                       </div>
                     )}
+                    {slot.links?.map((link) => (
+                      <div key={link} className="lectureNotesLink">
+                        <a href={typeof link === "string" ? link : link.url}>
+                          {link.title ? link.title : "Slides"}
+                        </a>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </Accordion.Body>

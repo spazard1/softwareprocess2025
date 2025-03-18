@@ -158,6 +158,7 @@ const Home = () => {
         ],
         slots: getStandardSchedule({
           title: "Git",
+          link: baseGithubUrl + "6 git.pptx",
         }),
       },
       {

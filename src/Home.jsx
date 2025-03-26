@@ -8,14 +8,49 @@ import "./Home.css";
 const baseGithubUrl =
   "https://github.com/spazard1/softwareprocess2025/raw/refs/heads/main/files/";
 
-const team1Name = "In Decent Exposure";
-const team2Name = "Robot Rally";
-const team3Name = "Royal Rangers";
-
 const firstSlot = "6:00";
 const secondSlot = "6:45";
 const thirdSlot = "7:30";
 const fourthSlot = "8:15";
+
+const teams = [
+  {
+    name: "In Decent Exposure",
+    number: 1,
+    members: [
+      { name: "Kyle Melby", role: "Scrum Master" },
+      { name: "David Schieffer", role: "PM" },
+      { name: "Jenny Njogu", role: "Engineer" },
+      { name: "Ethan Neils", role: "Engineer" },
+      { name: "Luke Daenzer", role: "Engineer" },
+      { name: "Brody Bush", role: "Engineer" },
+    ],
+  },
+  {
+    name: "Robot Rally",
+    number: 2,
+    members: [
+      { name: "Clark Nelson", role: "Scrum Master" },
+      { name: "Murphy O'Maley", role: "PM" },
+      { name: "Bright Holst", role: "Engineer" },
+      { name: "Christian Poppie", role: "Engineer" },
+      { name: "Sam Neumann", role: "Engineer" },
+      { name: "Graham Johnson", role: "Engineer" },
+    ],
+  },
+  {
+    name: "Royal Rangers",
+    number: 3,
+    members: [
+      { name: "Hailey DuPrée", role: "Scrum Master" },
+      { name: "David Carlson", role: "PM" },
+      { name: "Caleb Climaco", role: "Engineer" },
+      { name: "Jamille Edrial", role: "Engineer" },
+      { name: "Peyton Baker", role: "Engineer" },
+      { name: "Nicholas Pederson", role: "Engineer" },
+    ],
+  },
+];
 
 const Home = () => {
   const earlyTeamRef = useRef();
@@ -26,45 +61,30 @@ const Home = () => {
   middleTeamRef.current = 2;
   lateTeamRef.current = 3;
 
-  const getTeamName = useCallback((teamNumber) => {
-    switch (teamNumber) {
-      case 1:
-        return team1Name;
-      case 2:
-        return team2Name;
-      case 3:
-        return team3Name;
-    }
-  }, []);
-
   const getTeam = useCallback(
     (schedule) => {
       let teamNumber;
-      let teamName;
       let time;
       switch (schedule) {
         case 1:
           time = firstSlot;
           teamNumber = earlyTeamRef.current;
-          teamName = getTeamName(earlyTeamRef.current);
           earlyTeamRef.current = (earlyTeamRef.current % 3) + 1;
           break;
         case 2:
           time = secondSlot;
           teamNumber = middleTeamRef.current;
-          teamName = getTeamName(middleTeamRef.current);
           middleTeamRef.current = (middleTeamRef.current % 3) + 1;
           break;
         case 3:
           time = fourthSlot;
           teamNumber = lateTeamRef.current;
-          teamName = getTeamName(lateTeamRef.current);
           lateTeamRef.current = (lateTeamRef.current % 3) + 1;
           break;
       }
-      return { time, teamNumber: teamNumber, teamName: teamName };
+      return { time, team: teams[teamNumber - 1] };
     },
-    [getTeamName]
+    []
   );
 
   const getStandardSchedule = useCallback(
@@ -288,12 +308,7 @@ const Home = () => {
     <>
       <div className="title">Bethel Software Process 2025</div>
 
-      <TeamsInformation
-        team1Name={team1Name}
-        team2Name={team2Name}
-        team3Name={team3Name}
-        baseGithubUrl={baseGithubUrl}
-      />
+      <TeamsInformation teams={teams} baseGithubUrl={baseGithubUrl} />
 
       {schedules.map((schedule) => (
         <Accordion
@@ -322,13 +337,13 @@ const Home = () => {
             </Accordion.Header>
             {schedule.slots && (
               <Accordion.Body>
-                {schedule.slots?.map((slot) => (
-                  <div className="classScheduleItem" key={slot.time}>
+                {schedule.slots?.map((slot, index) => (
+                  <div className="classScheduleItem" key={index}>
                     <div className="classScheduleItemTime">{slot.time}</div>
                     {slot.title && (
                       <div className="lectureTitle">{slot.title}</div>
                     )}
-                    {slot.teamNumber && <TeamScheduleItem slot={slot} />}
+                    {slot.team && <TeamScheduleItem team={slot.team} />}
                     {slot.link && (
                       <div className="lectureNotesLink">
                         <a

@@ -1,0 +1,15 @@
+.teamOverlay {
+  background-color: #222;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 3px solid #333;
+  margin-left: 0.5rem;
+}
+
+.teamOverlay .member {
+  white-space: nowrap;
+}
+
+.teamName {
+  cursor: pointer;
+}

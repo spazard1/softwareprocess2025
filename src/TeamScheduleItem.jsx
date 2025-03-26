@@ -1,9 +1,34 @@
 import PropTypes from "prop-types";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
-const TeamScheduleItem = ({ slot }) => {
+import "./TeamScheduleItem.css";
+
+const TeamScheduleItem = ({ team }) => {
+  const overlay = (
+    <div className="teamOverlay">
+      {team.members.map((member) => {
+        const { name: memberName, role } = member;
+        return (
+          <div className="member" key={memberName}>
+            {memberName} - {role}
+          </div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <div className="classScheduleItem">
-      <div className={"roundedTag team" + slot?.teamNumber}>{slot?.teamName}</div>
+      <OverlayTrigger
+        trigger="click"
+        placement="right"
+        overlay={overlay}
+        rootClose={true}
+      >
+        <div className={"teamName roundedTag team" + team.number}>
+          {team.name}
+        </div>
+      </OverlayTrigger>
     </div>
   );
 };
@@ -11,5 +36,5 @@ const TeamScheduleItem = ({ slot }) => {
 export default TeamScheduleItem;
 
 TeamScheduleItem.propTypes = {
-  slot: PropTypes.object,
+  team: PropTypes.object,
 };

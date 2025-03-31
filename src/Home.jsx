@@ -199,14 +199,19 @@ const Home = () => {
       {
         date: "April 1",
         tags: [
+          { type: "scheduleAlert", title: "No In-Person Lecture" },
           { type: "sprintSchedule", title: "Sprint 2" },
           { type: "sprintSchedule", title: "Sprint 3 Pre-Planning" },
         ],
 
-        slots: getStandardSchedule({
-          title: "How to ship software without a PM",
+        slots: [{ ...getTeam(1), time: "6:00" },
+        { ...getTeam(2), time: "6:45" },
+        { ...getTeam(3), time: "7:30" },
+        {
+          title: "How to ship software without a PM (recording coming soon)",
           link: baseGithubUrl + "8 how to ship software without a pm.pptx",
-        }),
+        }
+      ],
       },
       {
         date: "April 8",

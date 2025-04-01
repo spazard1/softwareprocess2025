@@ -61,31 +61,28 @@ const Home = () => {
   middleTeamRef.current = 2;
   lateTeamRef.current = 3;
 
-  const getTeam = useCallback(
-    (schedule) => {
-      let teamNumber;
-      let time;
-      switch (schedule) {
-        case 1:
-          time = firstSlot;
-          teamNumber = earlyTeamRef.current;
-          earlyTeamRef.current = (earlyTeamRef.current % 3) + 1;
-          break;
-        case 2:
-          time = secondSlot;
-          teamNumber = middleTeamRef.current;
-          middleTeamRef.current = (middleTeamRef.current % 3) + 1;
-          break;
-        case 3:
-          time = fourthSlot;
-          teamNumber = lateTeamRef.current;
-          lateTeamRef.current = (lateTeamRef.current % 3) + 1;
-          break;
-      }
-      return { time, team: teams[teamNumber - 1] };
-    },
-    []
-  );
+  const getTeam = useCallback((schedule) => {
+    let teamNumber;
+    let time;
+    switch (schedule) {
+      case 1:
+        time = firstSlot;
+        teamNumber = earlyTeamRef.current;
+        earlyTeamRef.current = (earlyTeamRef.current % 3) + 1;
+        break;
+      case 2:
+        time = secondSlot;
+        teamNumber = middleTeamRef.current;
+        middleTeamRef.current = (middleTeamRef.current % 3) + 1;
+        break;
+      case 3:
+        time = fourthSlot;
+        teamNumber = lateTeamRef.current;
+        lateTeamRef.current = (lateTeamRef.current % 3) + 1;
+        break;
+    }
+    return { time, team: teams[teamNumber - 1] };
+  }, []);
 
   const getStandardSchedule = useCallback(
     (lectureInfo) => {
@@ -204,14 +201,21 @@ const Home = () => {
           { type: "sprintSchedule", title: "Sprint 3 Pre-Planning" },
         ],
 
-        slots: [{ ...getTeam(1), time: "6:00" },
-        { ...getTeam(2), time: "6:45" },
-        { ...getTeam(3), time: "7:30" },
-        {
-          title: "How to ship software without a PM (recording coming soon)",
-          link: baseGithubUrl + "8 how to ship software without a pm.pptx",
-        }
-      ],
+        slots: [
+          { ...getTeam(1), time: "6:00" },
+          { ...getTeam(2), time: "6:45" },
+          { ...getTeam(3), time: "7:30" },
+          {
+            title: "How to ship software without a PM",
+            links: [
+              baseGithubUrl + "8 how to ship software without a pm.pptx",
+              {
+                url: "https://youtu.be/obGYR3HO9ro",
+                title: "Lecture Recording",
+              },
+            ],
+          },
+        ],
       },
       {
         date: "April 8",

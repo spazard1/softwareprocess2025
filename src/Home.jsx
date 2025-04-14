@@ -228,14 +228,21 @@ const Home = () => {
       {
         date: "April 15",
         tags: [{ type: "sprintSchedule", title: "Sprint 3" }],
-        slots: getStandardSchedule({
-          title: "The Coaching Habit",
-          link: baseGithubUrl + "10 the coaching habit.pptx",
-        }),
+        slots: [
+          {
+            time: "6:00",
+            title: "The Coaching Habit",
+            link: baseGithubUrl + "10 the coaching habit.pptx",
+          },
+          { ...getTeam(1), time: "6:45" },
+          { ...getTeam(2), time: "7:30" },
+          { ...getTeam(3), time: "8:15" },
+        ],
       },
       {
         date: "April 22",
         tags: [
+          { type: "reviewSchedule", title: "Performance Review Due" },
           { type: "sprintSchedule", title: "Sprint 3" },
           { type: "sprintSchedule", title: "Sprint 4 Pre-Planning" },
         ],

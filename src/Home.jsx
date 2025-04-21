@@ -247,15 +247,16 @@ const Home = () => {
           { type: "sprintSchedule", title: "Sprint 4 Pre-Planning" },
         ],
         slots: getStandardSchedule({
-          title: "Resumes, Jobs, and Money",
-          link: baseGithubUrl + "11 resumes, jobs, and money.pptx",
+          title: "Guests and ???",
         }),
       },
       {
         date: "April 29",
         tags: [{ type: "sprintSchedule", title: "Sprint 4 Planning" }],
+
         slots: getStandardSchedule({
-          title: "Guests and ???",
+          title: "Resumes, Jobs, and Money",
+          link: baseGithubUrl + "11 resumes, jobs, and money.pptx",
         }),
       },
       {
@@ -276,7 +277,13 @@ const Home = () => {
       },
       {
         date: "May 20",
-        tags: [{ type: "scheduleAlert", title: "Final Presentations" }],
+        tags: [
+          { type: "scheduleAlert", title: "Final Presentations" },
+          {
+            type: "reviewSchedule",
+            title: "Performance Review Due (just grades)",
+          },
+        ],
         slots: [
           {
             title:
